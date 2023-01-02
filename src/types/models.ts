@@ -1,0 +1,35 @@
+import { Document, ObjectId } from 'mongoose';
+
+export interface IFood extends Document {
+  name: string;
+  image?: string;
+  carbohydrates: number;
+  proteins: number;
+  fats: number;
+  isAccepted: boolean;
+}
+
+export interface IUser extends Document {
+  name: string;
+  email: string;
+  password: string;
+  token?: string;
+  idType?: number;
+}
+
+export interface IUserInformation extends Document {
+  weight: number;
+  height: number;
+  age: number;
+  gender: number;
+  imc: number;
+  bmr: number;
+  userId: ObjectId;
+}
+
+export interface IUserGoal extends Document {
+  calories: number;
+  water: number;
+  dateGoal: Date;
+  userId: ObjectId;
+}
