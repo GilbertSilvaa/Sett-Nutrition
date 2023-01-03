@@ -39,3 +39,8 @@ export interface IWater extends Document {
   dateWater: Date;
   userId: ObjectId;
 }
+
+export interface IMealType extends Document {
+  name: string;
+  image: string;
+}
