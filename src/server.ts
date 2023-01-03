@@ -4,6 +4,7 @@ import dotenv from 'dotenv-safe';
 
 import { foodRouter } from './routes/food-route';
 import { userRouter } from './routes/user-route';
+import { waterRouter } from './routes/water-route';
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ mongoose.connect(process.env.MONGO_CONNECTION!)
   app.use(express.json());
   app.use('/food', foodRouter);
   app.use('/user', userRouter);
+  app.use('/water', waterRouter);
 
   const port = 4000;
 

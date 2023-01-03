@@ -33,3 +33,9 @@ export interface IUserGoal extends Document {
   dateGoal: Date;
   userId: ObjectId;
 }
+
+export interface IWater extends Document {
+  liters: number;
+  dateWater: Date;
+  userId: ObjectId;
+}
