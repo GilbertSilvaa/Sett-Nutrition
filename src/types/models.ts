@@ -44,3 +44,10 @@ export interface IMealType extends Document {
   name: string;
   image: string;
 }
+
+export interface IMeal extends Document {
+  foods: IFood[];
+  mealType: ObjectId;
+  userId: ObjectId;
+  dateMeal: Date;
+}
