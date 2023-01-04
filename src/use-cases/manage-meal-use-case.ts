@@ -1,4 +1,3 @@
-import { FoodRepository } from '../repositories/food-repository';
 import { MealRepository, CreateDataMeal, DataGetMeal } from '../repositories/meal-repository';
 
 export class ManageMealUseCase {
