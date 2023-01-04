@@ -7,7 +7,6 @@ import { ManageMealTypeUseCase } from '../use-cases/manage-meal-type-use-case';
 import { CreateDataMealType } from '../repositories/meal-type-repository';
 import { CreateDataMeal, DataGetMeal } from '../repositories/meal-repository';
 import { authMiddleware } from '../middlewares/auth-middleware';
-import { MongoFoodRepository } from '../repositories/mongo/mongo-food-repository';
 
 export const mealRouter = Router();
 
@@ -17,8 +16,7 @@ const manageMealTypeUseCase = new ManageMealTypeUseCase(
 );
 
 const mongoMealRepository = new MongoMealRepository();
-const mongoFoodRepository = new MongoFoodRepository();
-const manageMealUseCase = new ManageMealUseCase(mongoMealRepository, mongoFoodRepository);
+const manageMealUseCase = new ManageMealUseCase(mongoMealRepository);
 
 // create a meal
 mealRouter.post('/create', authMiddleware, async (request, response) => {
