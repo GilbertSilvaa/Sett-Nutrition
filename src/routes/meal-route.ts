@@ -18,6 +18,18 @@ const manageMealTypeUseCase = new ManageMealTypeUseCase(
 const mongoMealRepository = new MongoMealRepository();
 const manageMealUseCase = new ManageMealUseCase(mongoMealRepository);
 
+// get meals user
+mealRouter.get('/meals', authMiddleware, async (request, response) => {
+  const { date } = <DataGetMeal>request.body;
+
+  const mealsResponse = await manageMealUseCase.getMeals({
+    date,
+    userId: request.body.userId
+  });
+
+  return response.status(200).json(mealsResponse);
+});
+
 // create a meal
 mealRouter.post('/create', authMiddleware, async (request, response) => {
   const { foods, mealType } = <CreateDataMeal>request.body;
@@ -31,17 +43,27 @@ mealRouter.post('/create', authMiddleware, async (request, response) => {
   return response.status(201).json(mealResponse);
 });
 
-// get meals user
-mealRouter.get('/meals', authMiddleware, async (request, response) => {
-  const { date } = <DataGetMeal>request.body;
+// update meal
+mealRouter.put('/update', authMiddleware, async (request, response) => {
+  const { _id, foods, mealType } = <CreateDataMeal>request.body;
 
-  const mealsResponse = await manageMealUseCase.getMeals({
-    date,
-    userId: request.body.userId
+  await manageMealUseCase.update({
+    _id,
+    foods,
+    mealType
   });
 
-  return response.status(200).json(mealsResponse);
+  return response.status(204).send();
 });
+
+// delete meal
+mealRouter.delete('/delete/:id', authMiddleware, async (request, response) => {
+  await manageMealUseCase.delete(request.params.id);
+
+  return response.status(204).send();
+}); 
+
+/* -------------------- meal-type routes -------------------- */
 
 // get all meal types
 mealRouter.get('/all-types', authMiddleware, async (request, response) => {
