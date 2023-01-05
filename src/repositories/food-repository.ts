@@ -11,6 +11,7 @@ export interface CreateDataFood {
 
 export interface FoodRepository {
   getAll: () => Promise<IFood[]>;
+  getByname: (name: string) => Promise<IFood[] | null>;
   getById: (foodId: string) => Promise<IFood | null>;
   create: (data: CreateDataFood) => Promise<IFood>; 
   update: (data: CreateDataFood) => Promise<void>;

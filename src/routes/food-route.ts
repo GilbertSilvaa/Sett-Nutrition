@@ -11,9 +11,18 @@ const mongoFoodRepository = new MongoFoodRepository();
 const manageFoodUseCase = new ManageFoodUseCase(mongoFoodRepository);
 
 // search all foods
-foodRouter.get('/all', authMiddleware ,async (request, response) => {
+foodRouter.get('/all', authMiddleware , async (request, response) => {
   const foodsResponse = await manageFoodUseCase.getAll();
   
+  return response.status(200).json(foodsResponse);
+});
+
+// search food by name
+foodRouter.post('/name', authMiddleware, async (request, response) => {
+  const { name } = request.body;
+
+  const foodsResponse = await manageFoodUseCase.getByName(name);
+
   return response.status(200).json(foodsResponse);
 });
 

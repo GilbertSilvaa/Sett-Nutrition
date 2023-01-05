@@ -1,10 +1,19 @@
 import { CreateDataFood, FoodRepository } from '../food-repository';
 import { Food } from '../../models/food-model';
+import { IFood } from '../../types/models';
 
 export class MongoFoodRepository implements FoodRepository {
 
   async getAll() {
     return await Food.find().sort({ name: 1 });
+  }
+
+  async getByname(name: string) {
+    return await Food.find({
+      name: {
+        $regex: `.*${name}.*`
+      }
+    });
   }
   
   async getById(_id: string) {

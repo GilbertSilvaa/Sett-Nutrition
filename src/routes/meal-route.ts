@@ -18,7 +18,7 @@ const manageMealTypeUseCase = new ManageMealTypeUseCase(
 const mongoMealRepository = new MongoMealRepository();
 const manageMealUseCase = new ManageMealUseCase(mongoMealRepository);
 
-// get meals user
+// search meals user
 mealRouter.get('/meals', authMiddleware, async (request, response) => {
   const { date } = <DataGetMeal>request.body;
 
@@ -65,7 +65,7 @@ mealRouter.delete('/delete/:id', authMiddleware, async (request, response) => {
 
 /* -------------------- meal-type routes -------------------- */
 
-// get all meal types
+// search all meal types
 mealRouter.get('/all-types', authMiddleware, async (request, response) => {
   const mealTypesResponse = await manageMealTypeUseCase.getAll();
 

@@ -7,6 +7,10 @@ export class ManageFoodUseCase {
     return await this.foodRepository.getAll();
   }
 
+  async getByName(name: string) {
+    return await this.foodRepository.getByname(name);
+  }
+
   async getById(_id: string) {
     return await this.foodRepository.getById(_id);
   }

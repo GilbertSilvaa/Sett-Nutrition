@@ -77,7 +77,7 @@ userRouter.post('/login', async (request, response) => {
   return response.status(200).json(userResponse);
 });
 
-// get user informations
+// search user informations
 userRouter.get('/informations', authMiddleware, async (request, response) => {
   const userInformationsResponse = await manageUserInformationUseCase.getInformationById(
     request.body.userId
@@ -103,7 +103,7 @@ userRouter.put('/update-informations', authMiddleware, async (request, response)
   return response.status(204).send();
 });
 
-// get user goals
+// search user goals
 userRouter.get('/goals', authMiddleware, async (request, response) => {
   const userGoalsResponse = await manageUserGoalUseCase.getGoatById(
     request.body.userId
