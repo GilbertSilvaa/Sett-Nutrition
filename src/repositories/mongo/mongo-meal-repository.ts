@@ -7,7 +7,7 @@ export class MongoMealRepository implements MealRepository {
     return await Meal.find({
       userId,
       '$where': `this.dateMeal.toJSON().slice(0, 10) == "${date}"`
-    }).populate('foods');
+    }).populate('foods.food');
   }
 
   async create({ foods, mealType, userId }: CreateDataMeal) {

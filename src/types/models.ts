@@ -47,7 +47,10 @@ export interface IMealType extends Document {
 }
 
 export interface IMeal extends Document {
-  foods: IFood[];
+  foods: {
+    food: IFood[],
+    amountKilos: number
+  };
   mealType: ObjectId;
   userId: ObjectId;
   dateMeal: Date;

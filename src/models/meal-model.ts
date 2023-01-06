@@ -3,8 +3,11 @@ import { IMeal } from '../types/models';
 
 const mealModel = new Schema<IMeal>({
   foods: [{
-    type: Types.ObjectId,
-    ref: 'Food'
+    food: {
+      type: Types.ObjectId,
+      ref: 'Food'
+    },
+    amountKilos: Number
   }],
   mealType: {
     type: Types.ObjectId,

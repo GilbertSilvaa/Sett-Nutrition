@@ -2,7 +2,10 @@ import { IMeal } from '../types/models';
 
 export interface CreateDataMeal {
   _id?: string;
-  foods: string[];
+  foods: [{
+    food: string,
+    amountKilos: number
+  }];
   mealType: string;
   userId?: string;
 }
