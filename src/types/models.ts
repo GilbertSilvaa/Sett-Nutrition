@@ -3,6 +3,7 @@ import { Document, ObjectId } from 'mongoose';
 export interface IFood extends Document {
   name: string;
   image?: string;
+  calories: number;
   carbohydrates: number;
   proteins: number;
   fats: number;

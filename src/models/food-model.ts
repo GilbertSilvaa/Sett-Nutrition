@@ -3,6 +3,7 @@ import { IFood } from '../types/models';
 
 const foodModel = new Schema<IFood>({
   name: String,
+  calories: Number,
   carbohydrates: Number,
   proteins: Number,
   fats: Number,

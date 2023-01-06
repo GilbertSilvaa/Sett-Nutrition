@@ -1,6 +1,5 @@
 import { CreateDataFood, FoodRepository } from '../food-repository';
 import { Food } from '../../models/food-model';
-import { IFood } from '../../types/models';
 
 export class MongoFoodRepository implements FoodRepository {
 
@@ -20,9 +19,10 @@ export class MongoFoodRepository implements FoodRepository {
     return await Food.findOne({ _id });
   }
   
-  async create({ name, proteins, carbohydrates, fats, image }: CreateDataFood) {
+  async create({ name, calories, proteins, carbohydrates, fats, image }: CreateDataFood) {
     return await Food.create({
       name,
+      calories,
       proteins,
       carbohydrates,
       fats,
@@ -30,9 +30,10 @@ export class MongoFoodRepository implements FoodRepository {
     });
   }
 
-  async update({ _id, name, proteins, carbohydrates, fats, image }: CreateDataFood) {
+  async update({ _id, name, calories, proteins, carbohydrates, fats, image }: CreateDataFood) {
     await Food.updateOne({ _id }, {
       name, 
+      calories,
       proteins,
       carbohydrates,
       fats,
