@@ -7,6 +7,7 @@ export interface CreateDataFood {
   proteins: number; 
   carbohydrates: number; 
   fats: number;
+  portionInGrams: number;
   image?: string;
 }
 

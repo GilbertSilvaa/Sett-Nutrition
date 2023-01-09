@@ -7,6 +7,7 @@ export interface IFood extends Document {
   carbohydrates: number;
   proteins: number;
   fats: number;
+  portionInGrams: number;
   isAccepted: boolean;
 }
 
@@ -47,10 +48,10 @@ export interface IMealType extends Document {
 }
 
 export interface IMeal extends Document {
-  foods: {
-    food: IFood[],
+  foods: [{
+    food: IFood,
     amountKilos: number
-  };
+  }];
   mealType: ObjectId;
   userId: ObjectId;
   dateMeal: Date;

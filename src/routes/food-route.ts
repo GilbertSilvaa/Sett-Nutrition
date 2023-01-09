@@ -35,7 +35,7 @@ foodRouter.get('/:id', authMiddleware, async (request, response) => {
 
 // create a food
 foodRouter.post('/create', authMiddleware, async (request, response) => {
-  const { name, calories, proteins, carbohydrates, fats, image } = <CreateDataFood>request.body;
+  const { name, calories, proteins, carbohydrates, fats, portionInGrams, image } = <CreateDataFood>request.body;
 
   const foodResponse = await manageFoodUseCase.create({
     name,
@@ -43,6 +43,7 @@ foodRouter.post('/create', authMiddleware, async (request, response) => {
     proteins,
     carbohydrates,
     fats,
+    portionInGrams,
     image
   });
 
@@ -51,7 +52,7 @@ foodRouter.post('/create', authMiddleware, async (request, response) => {
 
 // update in food
 foodRouter.put('/update', authMiddleware, async (request, response) => {
-  const { _id, name, calories, proteins, carbohydrates, fats, image } = <CreateDataFood>request.body;
+  const { _id, name, calories, proteins, carbohydrates, fats, portionInGrams, image } = <CreateDataFood>request.body;
   
   await manageFoodUseCase.update({
     _id,
@@ -60,6 +61,7 @@ foodRouter.put('/update', authMiddleware, async (request, response) => {
     proteins,
     carbohydrates,
     fats,
+    portionInGrams,
     image
   });
 

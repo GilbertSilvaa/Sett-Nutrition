@@ -11,9 +11,7 @@ import { authMiddleware } from '../middlewares/auth-middleware';
 export const mealRouter = Router();
 
 const mongoMealTypeRepository = new MongoMealTypeRepository();
-const manageMealTypeUseCase = new ManageMealTypeUseCase(
-  mongoMealTypeRepository
-);
+const manageMealTypeUseCase = new ManageMealTypeUseCase(mongoMealTypeRepository);
 
 const mongoMealRepository = new MongoMealRepository();
 const manageMealUseCase = new ManageMealUseCase(mongoMealRepository);
@@ -27,7 +25,26 @@ mealRouter.get('/meals', authMiddleware, async (request, response) => {
     userId: request.body.userId
   });
 
-  return response.status(200).json(mealsResponse);
+  let [caloriesTotal, carbohydratesTotal, proteinsTotal, fatsTotal] = [0, 0, 0, 0];
+
+  mealsResponse.map(meal => {
+    meal.foods.map(foodObject => {
+      const { food, amountKilos } = foodObject;
+      caloriesTotal += (food.calories * ((amountKilos * 1000)/food.portionInGrams)); 
+      carbohydratesTotal += (food.carbohydrates * ((amountKilos * 1000)/food.portionInGrams));
+      proteinsTotal += (food.proteins * ((amountKilos * 1000)/food.portionInGrams));
+      fatsTotal += (food.fats * ((amountKilos * 1000)/food.portionInGrams));
+    });
+  });
+
+  const consumedResponse = {
+    calories: caloriesTotal,
+    carbohydrates: carbohydratesTotal,
+    proteins: proteinsTotal,
+    fats: fatsTotal
+  }
+
+  return response.status(200).json({ meals: mealsResponse, consumed: consumedResponse });
 });
 
 // create a meal

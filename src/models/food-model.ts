@@ -7,6 +7,10 @@ const foodModel = new Schema<IFood>({
   carbohydrates: Number,
   proteins: Number,
   fats: Number,
+  portionInGrams: {
+    type: Number,
+    default: 100
+  },
   image: {
     type: String,
     default: ""
