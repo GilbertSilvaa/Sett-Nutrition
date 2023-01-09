@@ -16,7 +16,7 @@ export class ManageUserUseCase {
   async create({ name, email, password, idType }: CreateDataUser) {
     const isUserExisting = await this.userRepository.login({ email, password });
 
-    if(isUserExisting) return { message: 'email in use' };
+    if(isUserExisting) return { message: "email já cadastrado" };
 
     const passwordEncrypted = await this.encryptAdapter.encrypt({ password });
 
