@@ -1,7 +1,9 @@
 import { UserRepository, CreateDataUser, NewSessionData } from '../user-repository';
 import { UserInformation } from '../../models/user-information-model';
 import { UserGoal } from '../../models/user-goal-model';
+import { Water } from '../../models/water-model';
 import { User } from '../../models/user-model';
+import { Meal } from '../../models/meal-model';
 
 export class MongoUserRepository implements UserRepository {
 
@@ -36,7 +38,13 @@ export class MongoUserRepository implements UserRepository {
   }
 
   async delete(_id: string) {
-    await User.deleteOne({ _id });
+    await Promise.all([
+      User.deleteOne({ _id }),
+      Meal.deleteMany({ userId: _id }),
+      Water.deleteMany({ userId: _id }),
+      UserGoal.deleteOne({ userId: _id }),
+      UserInformation.deleteOne({ userId: _id })
+    ]);
   }
 
   async login({ email }: CreateDataUser) {

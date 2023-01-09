@@ -1,5 +1,6 @@
 import { CreateDataFood, FoodRepository } from '../food-repository';
 import { Food } from '../../models/food-model';
+import { Meal } from '../../models/meal-model';
 
 export class MongoFoodRepository implements FoodRepository {
 
@@ -44,6 +45,9 @@ export class MongoFoodRepository implements FoodRepository {
   }
 
   async delete(_id: string) {
-    await Food.deleteOne({ _id });
+    await Promise.all([
+      Food.deleteOne({ _id }),
+      Meal.deleteMany({ 'foods.food': _id })
+    ]);
   }
 }
