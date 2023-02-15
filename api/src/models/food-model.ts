@@ -17,7 +17,7 @@ const foodModel = new Schema<IFood>({
   },
   isAccepted: {
     type: Boolean,
-    default: false
+    default: true
   }
 });
 

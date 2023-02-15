@@ -26,6 +26,10 @@ const userInformationModel = new Schema<IUserInformation>({
     type: Number,
     default: null
   },
+  activityLevel: {
+    type: Number,
+    default: 1
+  },
   userId: {
     type: Types.ObjectId,
     ref: 'User'

@@ -26,6 +26,7 @@ export interface IUserInformation extends Document {
   gender: number;
   imc: number;
   bmr: number;
+  activityLevel: number;
   userId: ObjectId;
 }
 

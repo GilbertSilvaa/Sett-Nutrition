@@ -8,6 +8,7 @@ export interface DataUserInformation {
   imc?: number;
   bmr?: number;
   userId?: string;
+  activityLevel?: number;
 }
 
 export interface UserInformationRepository {

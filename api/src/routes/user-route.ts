@@ -88,7 +88,7 @@ userRouter.get('/informations', authMiddleware, async (request, response) => {
 
 // update in user informations
 userRouter.put('/update-informations', authMiddleware, async (request, response) => {
-  const { weight, height, gender, age, bmr, imc } = <DataUserInformation>request.body;
+  const { weight, height, gender, age, activityLevel, bmr, imc } = <DataUserInformation>request.body;
 
   await manageUserInformationUseCase.update({
     weight,
@@ -97,6 +97,7 @@ userRouter.put('/update-informations', authMiddleware, async (request, response)
     age,
     bmr,
     imc,
+    activityLevel,
     userId: request.body.userId
   });
 
