@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useForm, Controller } from 'react-hook-form';
 import { Input } from '../../components/Input';
-import { ButtonLogin } from '../../components/ButtonLogin';
-import { Container, FormContainer } from './styles';
+import { Button } from '../../components/Button';
+import { Notice } from '../../components/Notice';
+import { Container, FormContainer, Link } from './styles';
 
 interface LoginData {
   email: string;
@@ -9,15 +11,27 @@ interface LoginData {
 }
 
 export function Login() {
+  const [messageError, setMessageError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const { control, handleSubmit } = useForm<LoginData>();
 
   function onSubmit(data: LoginData) {
+    setMessageError("");
+    setIsLoading(true);
+
+    setTimeout(() => {
+      setMessageError("E-mail ou senha incorreta");
+      setIsLoading(false);
+    }, 3000);
+
     console.log(data);
   }
 
   return (
     <Container>
+      <Notice message={messageError}/>
+
       <FormContainer>
         <Controller 
           control={control}
@@ -54,8 +68,15 @@ export function Login() {
           name="password"
         />
 
-        <ButtonLogin title="login" onPress={handleSubmit(onSubmit)}/>
+        <Button 
+          title="login" 
+          onPress={handleSubmit(onSubmit)} 
+          isLoading={isLoading} 
+          disabled={isLoading}
+        />
       </FormContainer>
+      
+      <Link>criar uma conta</Link>
     </Container>
   );
 }

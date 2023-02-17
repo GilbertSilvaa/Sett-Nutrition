@@ -11,3 +11,10 @@ export const FormContainer = styled.View`
   margin: auto;
   margin-top: 40%;
 `;
+
+export const Link = styled.Text`
+  font-size: 16px;
+  padding-bottom: 16px;
+  text-align: center;
+  text-decoration: underline;
+`;
