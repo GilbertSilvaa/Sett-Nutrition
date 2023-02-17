@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 export function Home() {
   return (
     <View>
-      <Text>fisrt test screen</Text>
+      <Text>Home Screen</Text>
     </View>
   );
 }
