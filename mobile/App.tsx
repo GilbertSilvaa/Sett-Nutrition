@@ -3,13 +3,16 @@ import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 
 import Routes from './src/routes';
+import { AuthContextProvider } from './src/contexts/auth-context';
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <StatusBar hidden/>
-      <Routes/>
-    </NavigationContainer>
+    <AuthContextProvider>
+      <NavigationContainer>
+        <StatusBar hidden/>
+        <Routes/>
+      </NavigationContainer>
+    </AuthContextProvider>
   );
 }
 

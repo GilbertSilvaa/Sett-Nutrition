@@ -1,17 +1,17 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { Login } from '../screens/Login';
+import { useAuth } from '../hooks/use-auth';
 
 import StackRoutes from './stack-routes';
 
 const Drawer = createDrawerNavigator();
 
 export default function Routes() {
-
-  const isAuthenticad = false;
+  const { user, isUserLoading } = useAuth();
 
   return (
     <>
-      {isAuthenticad ? 
+      {user.id ? 
         <Drawer.Navigator>
           <Drawer.Screen 
             name="HomeDrawer" 

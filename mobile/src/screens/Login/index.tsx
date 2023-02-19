@@ -5,27 +5,37 @@ import { Button } from '../../components/Button';
 import { Notice } from '../../components/Notice';
 import { Container, FormContainer, Link } from './styles';
 
+import { useAuth } from '../../hooks/use-auth';
+import { api } from '../../services/api';
+import { setAccessToken } from '../../utils/access-token';
+
 interface LoginData {
   email: string;
   password: string;
 }
 
 export function Login() {
-  const [messageError, setMessageError] = useState("");
+  const { setUser } = useAuth();
+
+  const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
   const { control, handleSubmit } = useForm<LoginData>();
 
-  function onSubmit(data: LoginData) {
+  async function onSubmit(data: LoginData) {
     setMessageError("");
     setIsLoading(true);
 
-    setTimeout(() => {
-      setMessageError("E-mail ou senha incorreta");
-      setIsLoading(false);
-    }, 3000);
+    const { data: userResponse } = await api.post('/user/login', data);
 
-    console.log(data);
+    if(userResponse._id) {
+      setUser({ id: userResponse._id });
+      await setAccessToken(userResponse.token);
+    }
+    else 
+      setMessageError(userResponse.message);
+
+    setIsLoading(false);
   }
 
   return (
