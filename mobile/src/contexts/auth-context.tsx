@@ -28,13 +28,16 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
 
     const accessToken = await getAccessToken();
     
-    const { data } = await api.get('/user/goals', { 
-      headers: {'x-access-token': accessToken} 
-    });
+    try {
+      const { data } = await api.get('/user/goals', { 
+        headers: {'x-access-token': ''} 
+      });
+      
+      if(data) setUser({ id: data.userId }); 
 
-    if(data) setUser({ id: data.userId }); 
-
-    setIsUserLoading(false);
+    } finally {
+      setIsUserLoading(false);
+    }
   }
 
   useEffect(() => {

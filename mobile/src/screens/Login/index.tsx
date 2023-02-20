@@ -8,6 +8,7 @@ import { Container, FormContainer, Link } from './styles';
 import { useAuth } from '../../hooks/use-auth';
 import { api } from '../../services/api';
 import { setAccessToken } from '../../utils/access-token';
+import { CreateAccount } from '../CreateAccount';
 
 interface LoginData {
   email: string;
@@ -15,16 +16,16 @@ interface LoginData {
 }
 
 export function Login() {
-  const { setUser } = useAuth();
-
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [goToCreateAccount, setGoToCreateAccount] = useState(false);
 
   const { control, handleSubmit } = useForm<LoginData>();
+  const { setUser } = useAuth();
 
   async function onSubmit(data: LoginData) {
-    setMessageError("");
     setIsLoading(true);
+    setMessageError('');
 
     const { data: userResponse } = await api.post('/user/login', data);
 
@@ -39,54 +40,60 @@ export function Login() {
   }
 
   return (
-    <Container>
-      <Notice message={messageError}/>
+    <>
+      {goToCreateAccount ? 
+        <CreateAccount backLogin={() => setGoToCreateAccount(false)}/> 
+        :     
+        <Container>
+          <Notice message={messageError}/>
 
-      <FormContainer>
-        <Controller 
-          control={control}
-          rules={{
-            required: true
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input 
-              label="E-mail" 
-              placeholder="exemple@email.com"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
+          <FormContainer>
+            <Controller 
+              control={control}
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input 
+                  label="E-mail" 
+                  placeholder="exemple@email.com"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                />
+              )}
+              name="email"
             />
-          )}
-          name="email"
-        />
 
-        <Controller
-          control={control}
-          rules={{
-            required: true
-          }}
-          render={({ field: { onChange, onBlur, value } }) => (
-            <Input 
-              label="Senha" 
-              placeholder="informe a senha"
-              onBlur={onBlur}
-              onChangeText={onChange}
-              value={value}
-              isPassword
+            <Controller
+              control={control}
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input 
+                  label="Senha" 
+                  placeholder="informe a senha"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value}
+                  isPassword
+                />
+              )}
+              name="password"
             />
-          )}
-          name="password"
-        />
 
-        <Button 
-          title="login" 
-          onPress={handleSubmit(onSubmit)} 
-          isLoading={isLoading} 
-          disabled={isLoading}
-        />
-      </FormContainer>
-      
-      <Link>criar uma conta</Link>
-    </Container>
+            <Button 
+              title="login" 
+              onPress={handleSubmit(onSubmit)} 
+              isLoading={isLoading} 
+              disabled={isLoading}
+            />
+          </FormContainer>
+          
+          <Link onPress={() => setGoToCreateAccount(true)}>criar uma conta</Link>
+        </Container>
+      }
+    </>
   );
 }
