@@ -20,12 +20,29 @@ export class ManageUserUseCase {
 
     const passwordEncrypted = await this.encryptAdapter.encrypt({ password });
 
-    return await this.userRepository.create({
+    const userResponse = await this.userRepository.create({
       name, 
       email,
       idType,
       password: passwordEncrypted
     });
+
+    const KEY_JWT = process.env.KEY_JWT ?? "";
+
+    const token = this.tokenAdapter.createToken({ 
+      id: userResponse._id,
+      secret: KEY_JWT,
+      expiresTime: 300000
+    });
+
+    await this.userRepository.newSession({
+      idUser: userResponse._id,
+      token
+    });
+
+    userResponse.token = token;
+
+    return userResponse;
   }
 
   async update({ _id, name, email, password }: CreateDataUser) {
