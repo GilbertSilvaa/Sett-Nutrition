@@ -39,61 +39,58 @@ export function Login() {
     setIsLoading(false);
   }
 
-  return (
-    <>
-      {goToCreateAccount ? 
-        <CreateAccount backLogin={() => setGoToCreateAccount(false)}/> 
-        :     
-        <Container>
-          <Notice message={messageError}/>
+  if(goToCreateAccount)
+    return <CreateAccount backLogin={() => setGoToCreateAccount(false)}/>;
 
-          <FormContainer>
-            <Controller 
-              control={control}
-              rules={{
-                required: true
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input 
-                  label="E-mail" 
-                  placeholder="exemple@email.com"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                />
-              )}
-              name="email"
-            />
+  return (     
+    <Container>
+      <Notice message={messageError}/>
 
-            <Controller
-              control={control}
-              rules={{
-                required: true
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input 
-                  label="Senha" 
-                  placeholder="informe a senha"
-                  onBlur={onBlur}
-                  onChangeText={onChange}
-                  value={value}
-                  isPassword
-                />
-              )}
-              name="password"
+      <FormContainer>
+        <Controller 
+          control={control}
+          rules={{
+            required: true
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input 
+              label="E-mail" 
+              placeholder="exemple@email.com"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
             />
+          )}
+          name="email"
+        />
 
-            <Button 
-              title="login" 
-              onPress={handleSubmit(onSubmit)} 
-              isLoading={isLoading} 
-              disabled={isLoading}
+        <Controller
+          control={control}
+          rules={{
+            required: true
+          }}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <Input 
+              label="Senha" 
+              placeholder="informe a senha"
+              onBlur={onBlur}
+              onChangeText={onChange}
+              value={value}
+              isPassword
             />
-          </FormContainer>
-          
-          <Link onPress={() => setGoToCreateAccount(true)}>criar uma conta</Link>
-        </Container>
-      }
-    </>
+          )}
+          name="password"
+        />
+
+        <Button 
+          title="login" 
+          onPress={handleSubmit(onSubmit)} 
+          isLoading={isLoading} 
+          disabled={isLoading}
+        />
+      </FormContainer>
+      
+      <Link onPress={() => setGoToCreateAccount(true)}>criar uma conta</Link>
+    </Container>
   );
 }

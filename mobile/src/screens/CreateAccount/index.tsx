@@ -6,6 +6,7 @@ import { Notice } from '../../components/Notice';
 import { Container, FormContainer, Link } from './styles';
 
 import { api } from '../../services/api';
+import { setAccessToken } from '../../utils/access-token';
 
 interface CreateAccountProps {
   backLogin: () => void;
@@ -19,9 +20,9 @@ interface CreateAccountData {
 }
 
 export function CreateAccount({ backLogin }: CreateAccountProps) {
+  const [userIdCreated, setUserIdCreated] = useState('');
   const [messageError, setMessageError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [userIdCreated, setUserIdCreated] = useState('');
 
   const { control, handleSubmit } = useForm<CreateAccountData>();
 
@@ -39,7 +40,7 @@ export function CreateAccount({ backLogin }: CreateAccountProps) {
 
     if(userResponse._id) {
       setUserIdCreated(userResponse._id);
-
+      setAccessToken(userResponse.token);
     }
     else
       setMessageError(userResponse.message);

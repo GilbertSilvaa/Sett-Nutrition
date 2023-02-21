@@ -14,47 +14,44 @@ export default function Routes() {
   if(isUserLoading) 
     return <Loading/>;
 
+  if(!user.id)
+    return <Login/>;
+
   return (
-    <>
-      {!user.id ? 
-        <Login/>
-        :
-        <Drawer.Navigator
-          screenOptions={{
-            drawerStyle: {
-              backgroundColor: '#257BE2',
-              paddingHorizontal: 8
-            },
-            drawerActiveBackgroundColor: '#ffffff33',
-            drawerActiveTintColor: '#FFF',
-            drawerInactiveTintColor: '#FFF',
-            drawerItemStyle: {
-              padding: 12
-            }
-          }}
-        >
-          <Drawer.Screen 
-            name="HomeDrawer" 
-            component={ StackRoutes }
-            options={{
-              title: 'Home',
-              headerTitle: '',
-              headerShadowVisible: false,
-              headerTintColor: '#113560',
-              headerStyle: {
-                backgroundColor: '#CCD1FF'
-              },
-              drawerIcon: () => (
-                <Ionicons
-                  name="home-outline"
-                  size={20}
-                  color="#FFF"
-                />
-              )
-            }}
-          />
-        </Drawer.Navigator>
-      }
-    </>
+    <Drawer.Navigator
+      screenOptions={{
+        drawerStyle: {
+          backgroundColor: '#257BE2',
+          paddingHorizontal: 8
+        },
+        drawerActiveBackgroundColor: '#ffffff33',
+        drawerActiveTintColor: '#FFF',
+        drawerInactiveTintColor: '#FFF',
+        drawerItemStyle: {
+          padding: 12
+        }
+      }}
+    >
+      <Drawer.Screen 
+        name="HomeDrawer" 
+        component={ StackRoutes }
+        options={{
+          title: 'Home',
+          headerTitle: '',
+          headerShadowVisible: false,
+          headerTintColor: '#113560',
+          headerStyle: {
+            backgroundColor: '#CCD1FF'
+          },
+          drawerIcon: () => (
+            <Ionicons
+              name="home-outline"
+              size={20}
+              color="#FFF"
+            />
+          )
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
