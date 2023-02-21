@@ -1,0 +1,72 @@
+import { useState } from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { Input } from '../../components/Input';
+import { Container, Modal, ModalTitle, ModalBody, ModalFooter, Button, Text } from './styles';
+
+export function UserInformationSteps() {
+  const [step, setStep] = useState(0);
+
+  const informationSteps = [
+    {
+      question: 'Informe sua idade',
+      unit: null
+    },
+    {
+      question: 'Informe seu peso',
+      unit: 'kg'
+    },
+    {
+      question: 'Informe sua meta de peso',
+      unit: 'kg'
+    },
+  ]
+
+  function nextStep() {
+    if((step + 1) < informationSteps.length)
+      setStep(prev => prev + 1); 
+  }
+
+  function previousStep() {
+    if(step > 0)
+      setStep(prev => prev - 1);
+  }
+
+  return (
+    <Container>
+      <Modal>
+        <ModalTitle>{ informationSteps[step].question }</ModalTitle>
+        <ModalBody>
+          <Input textAlign="center" keyboardType="numeric" placeholder="digite aqui"/>
+        </ModalBody>
+        <ModalFooter>
+          {step == 0 ? 
+            <Text></Text> 
+            :  
+            <Button activeOpacity={0.7} onPress={previousStep}>
+              <Text>
+                <Ionicons
+                  name="arrow-back"
+                  size={24}
+                  color="#FFF"
+                />
+              </Text>
+            </Button>
+          }
+          <Button activeOpacity={0.7} onPress={nextStep}>
+            <Text>
+              {(step + 1) == informationSteps.length ?
+                'FINALIZAR'  
+                :
+                <Ionicons
+                  name="arrow-forward"
+                  size={24}
+                  color="#FFF"
+                />
+              }
+            </Text>
+          </Button>
+        </ModalFooter>
+      </Modal>
+    </Container>
+  );
+}

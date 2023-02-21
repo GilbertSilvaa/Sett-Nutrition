@@ -3,6 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Notice } from '../../components/Notice';
+import { UserInformationSteps } from '../UserInformationSteps';
 import { Container, FormContainer, Link } from './styles';
 
 import { api } from '../../services/api';
@@ -47,6 +48,8 @@ export function CreateAccount({ backLogin }: CreateAccountProps) {
 
     setIsLoading(false);
   }
+
+  return <UserInformationSteps/>;
 
   return (
     <Container>

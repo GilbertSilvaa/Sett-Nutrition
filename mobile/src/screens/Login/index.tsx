@@ -56,6 +56,7 @@ export function Login() {
             <Input 
               label="E-mail" 
               placeholder="exemple@email.com"
+              keyboardType="email-address"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}
