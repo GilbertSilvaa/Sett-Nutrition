@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Input } from '../../components/Input';
+import { Select } from '../../components/Select';
 import { 
   Container, 
   Modal, 
@@ -31,13 +32,23 @@ export function UserInformationSteps() {
       <Modal>
         <ModalTitle>{ informationSteps[step].question }</ModalTitle>
         <ModalBody>
-          <Input 
-            textAlign="center" 
-            keyboardType="numeric" 
-            placeholder="digite aqui"
-            unit={informationSteps[step].unit}
-          />
+
+          {informationSteps[step].isSelectList ?
+            <Select 
+              options={informationSteps[step].options!}
+              onChange={() => {}}
+            />
+            :
+            <Input 
+              textAlign="center" 
+              keyboardType="numeric" 
+              placeholder="digite aqui"
+              unit={informationSteps[step].unit}
+            />
+          }
+  
         </ModalBody>
+
         <ModalFooter>
           {step == 0 ? 
             <Text></Text> 
@@ -66,6 +77,7 @@ export function UserInformationSteps() {
             </Text>
           </Button>
         </ModalFooter>
+        
       </Modal>
     </Container>
   );
