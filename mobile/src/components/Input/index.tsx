@@ -1,21 +1,36 @@
 import { TextInputProps } from 'react-native';
-import { Container, Label, Input as InputComponent } from './styles';
+import { 
+  Container, 
+  Label, 
+  Input as InputComponent, 
+  InputContainer, 
+  UnitContainer, 
+  UnitText 
+} from './styles';
 
-interface InputProps extends TextInputProps{
+export interface InputProps extends TextInputProps{
   label?: string;
   placeholder?: string;
   isPassword?: boolean;
+  unit?: 'kg' | 'g' | 'ml' | 'cals' | 'm';
 }
 
-export function Input({ label, placeholder, isPassword, ...rest }: InputProps) {
+export function Input({ label, placeholder, isPassword, unit, ...rest }: InputProps) {
   return (
     <Container>
       <Label>{ label }</Label>
-      <InputComponent 
-        placeholder={placeholder} 
-        secureTextEntry={isPassword}
-        {...rest}
-      />
+      <InputContainer>
+        <InputComponent 
+          placeholder={placeholder} 
+          secureTextEntry={isPassword}
+          {...rest}
+        />
+        {unit &&
+          <UnitContainer>
+            <UnitText>{unit}</UnitText>
+          </UnitContainer>
+        }
+      </InputContainer>
     </Container>
   );
 }

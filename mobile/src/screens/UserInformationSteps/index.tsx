@@ -1,25 +1,20 @@
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { Input } from '../../components/Input';
-import { Container, Modal, ModalTitle, ModalBody, ModalFooter, Button, Text } from './styles';
+import { 
+  Container, 
+  Modal, 
+  ModalTitle, 
+  ModalBody, 
+  ModalFooter, 
+  Button, 
+  Text 
+} from './styles';
+
+import { informationSteps } from './questions';
 
 export function UserInformationSteps() {
   const [step, setStep] = useState(0);
-
-  const informationSteps = [
-    {
-      question: 'Informe sua idade',
-      unit: null
-    },
-    {
-      question: 'Informe seu peso',
-      unit: 'kg'
-    },
-    {
-      question: 'Informe sua meta de peso',
-      unit: 'kg'
-    },
-  ]
 
   function nextStep() {
     if((step + 1) < informationSteps.length)
@@ -36,7 +31,12 @@ export function UserInformationSteps() {
       <Modal>
         <ModalTitle>{ informationSteps[step].question }</ModalTitle>
         <ModalBody>
-          <Input textAlign="center" keyboardType="numeric" placeholder="digite aqui"/>
+          <Input 
+            textAlign="center" 
+            keyboardType="numeric" 
+            placeholder="digite aqui"
+            unit={informationSteps[step].unit}
+          />
         </ModalBody>
         <ModalFooter>
           {step == 0 ? 

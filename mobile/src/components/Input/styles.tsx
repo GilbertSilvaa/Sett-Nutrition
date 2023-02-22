@@ -14,6 +14,32 @@ export const Input = styled.TextInput`
   font-size: 16px;
   color: #222222;
   border-radius: 4px;
+  
+  flex: 1;
+`;
+
+export const InputContainer = styled.View`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const UnitContainer = styled.View`
+  width: 55px;
+  height: 100%;
+  background-color: #53a3ff33;
+  border: 2px solid #0052B3;
+  border-radius: 4px;
+  border-left-width: 1px;
+
+  display: flex;
+  justify-content: center;
+`;
+
+export const UnitText = styled.Text`
+  font-size: 16px;
+  text-align: center;
+  color: #113560;
 `;
 
 export const Label = styled.Text`
