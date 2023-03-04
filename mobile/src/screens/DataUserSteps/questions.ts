@@ -1,5 +1,5 @@
 import { InputProps } from '../../components/Input';
-import { InformationsData } from '../../screens/UserInformationSteps';
+import { InformationsData } from '.';
 
 let inputProps : InputProps;
 
@@ -41,11 +41,11 @@ export const informationSteps : ISteps[] = [
       },
       {
         label: 'Masculino',
-        value: 'M'
+        value: '1'
       },
       {
         label: 'Feminino',
-        value: 'F'
+        value: '2'
       }
     ]
   },

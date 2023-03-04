@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Input } from '../../components/Input';
 import { Button } from '../../components/Button';
 import { Notice } from '../../components/Notice';
-import { UserInformationSteps } from '../UserInformationSteps';
+import { DataUserSteps } from '../DataUserSteps';
 import { Container, FormContainer, Link } from './styles';
 
 import { api } from '../../services/api';
@@ -49,7 +49,8 @@ export function CreateAccount({ backLogin }: CreateAccountProps) {
     setIsLoading(false);
   }
 
-  return <UserInformationSteps/>;
+  if(userIdCreated)
+    return <DataUserSteps userId={userIdCreated}/>;
 
   return (
     <Container>
@@ -82,6 +83,7 @@ export function CreateAccount({ backLogin }: CreateAccountProps) {
             <Input 
               label="E-mail"
               placeholder="Informe seu melhor email"
+              keyboardType="email-address"
               onBlur={onBlur}
               onChangeText={onChange}
               value={value}

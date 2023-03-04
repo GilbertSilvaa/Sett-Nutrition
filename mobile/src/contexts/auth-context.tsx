@@ -30,7 +30,7 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
     
     try {
       const { data } = await api.get('/user/goals', { 
-        headers: {'x-access-token': ''} 
+        headers: {'x-access-token': accessToken} 
       });
       
       if(data) setUser({ id: data.userId }); 

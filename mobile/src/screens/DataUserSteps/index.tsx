@@ -15,6 +15,10 @@ import {
 } from './styles';
 
 import { informationSteps } from './questions';
+import { bmrCalculate } from '../../utils/calculate';
+import { api } from '../../services/api';
+import { useAuth } from '../../hooks/use-auth';
+import { getAccessToken } from '../../utils/access-token';
 
 export interface InformationsData {
   age: number;
@@ -26,11 +30,16 @@ export interface InformationsData {
   weightGoal: number;
 }
 
-export function UserInformationSteps() {
+interface DataUserProps {
+  userId: string;
+}
+
+export function DataUserSteps({ userId }: DataUserProps) {
   const [step, setStep] = useState(0);
   const [messageError, setMessageError] = useState('');
 
   const { control, handleSubmit } = useForm<InformationsData>();
+  const { setUser } = useAuth();
 
   function nextStep() {
     if(step + 1 < informationSteps.length)
@@ -42,7 +51,7 @@ export function UserInformationSteps() {
       setStep(prev => prev - 1);
   }
 
-  function onSubmit(data: InformationsData) {
+  async function onSubmit(data: InformationsData) {
     setMessageError('');
 
     const dataValues = Object.values(data);
@@ -52,7 +61,32 @@ export function UserInformationSteps() {
       return;
     }
 
-    console.log(data);
+    const imc = data.weight/(Math.pow(data.height, 2));
+    const bmr = bmrCalculate({ 
+      activityLevel: data.activityLevel,
+      age: data.age,
+      gender: data.gender,
+      height: data.height,
+      weight: data.weight
+    });
+
+    let addCaloriesGoal = 0;
+
+    if(data.weight > data.weightGoal) addCaloriesGoal = -500;
+    if(data.weight < data.weightGoal) addCaloriesGoal = 500;
+
+    const accessToken = await getAccessToken();
+
+    await Promise.all([
+      api.put('/user/update-informations', {...data, imc, bmr}, {
+        headers: {'x-access-token': accessToken}
+      }),
+      api.put('/user/update-goals', {calories: bmr + addCaloriesGoal, water: data.waterGoal}, {
+        headers: {'x-access-token': accessToken}
+      })
+    ]);
+
+    setUser({ id: userId });
   }
 
   return (
