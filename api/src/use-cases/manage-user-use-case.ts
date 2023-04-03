@@ -63,34 +63,32 @@ export class ManageUserUseCase {
   async login({ email, password }: CreateDataUser) {
     const userResponse = await this.userRepository.login({ email, password });
 
-    if(userResponse) {
-      const isPasswordCorrect = await this.encryptAdapter.verifyPassword({ 
-        passwordSent: password,
-        passwordCorrect: userResponse.password
-      });
+    if(!userResponse)  
+      return { message: "email ou senha invalido" };
 
-      if(isPasswordCorrect) {
-        const KEY_JWT = process.env.KEY_JWT ?? "";
+    const isPasswordCorrect = await this.encryptAdapter.verifyPassword({ 
+      passwordSent: password,
+      passwordCorrect: userResponse.password
+    });
 
-        const token = this.tokenAdapter.createToken({ 
-          id: userResponse._id,
-          secret: KEY_JWT,
-          expiresTime: 300000
-        });
-        
-        await this.userRepository.newSession({
-          idUser: userResponse._id,
-          token
-        });
-
-        userResponse.token = token;
-
-        return userResponse;
-      }
-
+    if(!isPasswordCorrect) 
       return { message: "senha invalida" };
-    }
+      
+    const KEY_JWT = process.env.KEY_JWT ?? "";
 
-    return { message: "email ou senha invalido" };
+    const token = this.tokenAdapter.createToken({ 
+      id: userResponse._id,
+      secret: KEY_JWT,
+      expiresTime: 300000
+    });
+    
+    await this.userRepository.newSession({
+      idUser: userResponse._id,
+      token
+    });
+
+    userResponse.token = token;
+
+    return userResponse;
   }
 }
