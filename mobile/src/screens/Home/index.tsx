@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { formatDate } from './utils/format-date';
-import { Container, DateContainer, Text, Button, ButtonMenu } from './styles';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { Container, DateContainer, Text, Button, ButtonMenu } from './styles';
+
+import { formatDate } from './utils/format-date';
 
 export function Home() {
   const navigation = useNavigation();
