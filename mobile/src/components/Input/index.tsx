@@ -27,7 +27,7 @@ export function Input({ label, placeholder, isPassword, unit, ...rest }: InputPr
         />
         {unit &&
           <UnitContainer>
-            <UnitText>{unit}</UnitText>
+            <UnitText>{ unit }</UnitText>
           </UnitContainer>
         }
       </InputContainer>

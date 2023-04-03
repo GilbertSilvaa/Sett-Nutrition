@@ -11,7 +11,7 @@ export default function StackRoutes() {
         name="Home" 
         component={ Home }
         options={{
-          headerShown: false,
+          headerShown: false
         }}
       />
     </Stack.Navigator>

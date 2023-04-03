@@ -12,6 +12,7 @@ import { useAuth } from '../hooks/use-auth';
 import StackRoutes from './stack-routes';
 import { Loading } from '../components/Loading';
 import { removeAcessToken } from '../utils/access-token';
+import { Home } from '../screens/Home';
 
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
@@ -24,8 +25,11 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
   }
 
   return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props}/>
+    <DrawerContentScrollView 
+      contentContainerStyle={{justifyContent: 'space-between', flex: 1}}
+      {...props} 
+    >
+      <DrawerItemList {...props} />
       <DrawerItem 
         icon={() => 
           <Ionicons
@@ -36,6 +40,12 @@ function CustomDrawerContent(props: DrawerContentComponentProps) {
         }
         label="Logout" 
         onPress={logout} 
+        inactiveTintColor='#FFF'
+        style={{
+          borderTopWidth: 1, 
+          borderTopColor: '#FFF', 
+          padding: 12,
+        }}
       />
     </DrawerContentScrollView>
   );
@@ -79,6 +89,7 @@ export default function Routes() {
           headerStyle: {
             backgroundColor: '#CCD1FF'
           },
+          headerShown: false,
           drawerIcon: () => (
             <Ionicons
               name="home-outline"
