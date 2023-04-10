@@ -3,12 +3,8 @@ import { UserGoal } from '../../models/user-goal-model';
 
 export class MongoUserGoalRepository implements UserGoalRepository {
 
-  async update({ calories, water, dateGoal, userId }: DataUserGoal) {
-    await UserGoal.updateOne({ userId }, {
-      calories,
-      water,
-      dateGoal
-    });
+  async update({ userId, ...params }: DataUserGoal) {
+    await UserGoal.updateOne({ userId }, params);
   }
 
   async getGoatById(userId: string) {

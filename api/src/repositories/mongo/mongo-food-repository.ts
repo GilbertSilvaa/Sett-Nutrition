@@ -20,28 +20,12 @@ export class MongoFoodRepository implements FoodRepository {
     return await Food.findOne({ _id });
   }
   
-  async create({ name, calories, proteins, carbohydrates, fats, portionInGrams, image }: CreateDataFood) {
-    return await Food.create({
-      name,
-      calories,
-      proteins,
-      carbohydrates,
-      fats,
-      portionInGrams,
-      image
-    });
+  async create(params: CreateDataFood) {
+    return await Food.create(params);
   }
 
-  async update({ _id, name, calories, proteins, carbohydrates, fats, portionInGrams, image }: CreateDataFood) {
-    await Food.updateOne({ _id }, {
-      name, 
-      calories,
-      proteins,
-      carbohydrates,
-      fats,
-      portionInGrams,
-      image
-    });
+  async update({ _id, ...params }: CreateDataFood) {
+    await Food.updateOne({ _id }, params);
   }
 
   async delete(_id: string) {

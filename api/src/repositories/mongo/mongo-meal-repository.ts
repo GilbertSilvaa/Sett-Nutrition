@@ -10,12 +10,8 @@ export class MongoMealRepository implements MealRepository {
     }).populate('foods.food');
   }
 
-  async create({ foods, mealType, userId }: CreateDataMeal) {
-    return await Meal.create({
-      foods,
-      mealType,
-      userId
-    });
+  async create(params: CreateDataMeal) {
+    return await Meal.create(params);
   }
 
   async update({ _id, foods, mealType }: CreateDataMeal) {

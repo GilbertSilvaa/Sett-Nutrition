@@ -15,29 +15,12 @@ export class ManageFoodUseCase {
     return await this.foodRepository.getById(_id);
   }
 
-  async create({ name, calories, proteins, carbohydrates, fats, portionInGrams, image }: CreateDataFood) {
-    return await this.foodRepository.create({
-      name,
-      calories,
-      proteins,
-      carbohydrates,
-      fats,
-      portionInGrams,
-      image
-    });
+  async create(params: CreateDataFood) {
+    return await this.foodRepository.create(params);
   }
 
-  async update({ _id, name, calories, proteins, carbohydrates, fats, portionInGrams, image }: CreateDataFood) {
-    await this.foodRepository.update({
-      _id, 
-      name, 
-      calories,
-      proteins,
-      carbohydrates,
-      fats,
-      portionInGrams,
-      image
-    });
+  async update(params: CreateDataFood) {
+    await this.foodRepository.update(params);
   }
 
   async delete(_id: string) {

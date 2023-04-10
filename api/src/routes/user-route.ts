@@ -35,27 +35,20 @@ const manageUserGoalUseCase = new ManageUserGoalUseCase(mongoUserGoalRepository)
 
 // create a user
 userRouter.post('/create', async (request, response) => {
-  const { name, email, password, idType } = <CreateDataUser>request.body;
+  const data = <CreateDataUser>request.body;
 
-  const userResponse = await manageUserUseCase.create({
-    name,
-    email,
-    password,
-    idType
-  });
-
+  const userResponse = await manageUserUseCase.create(data);
+  
   return response.status(201).json(userResponse);
 });
 
 // update in user
 userRouter.put('/update', authMiddleware, async (request, response) => {
-  const { name, email, password } = <CreateDataUser>request.body;
+  const data = <CreateDataUser>request.body;
 
   await manageUserUseCase.update({
-    _id: request.body.userId,
-    name, 
-    email,
-    password
+    ...data,
+    _id: request.body.userId
   });
 
   return response.status(204).send();
@@ -88,16 +81,10 @@ userRouter.get('/informations', authMiddleware, async (request, response) => {
 
 // update in user informations
 userRouter.put('/update-informations', authMiddleware, async (request, response) => {
-  const { weight, height, gender, age, activityLevel, bmr, imc } = <DataUserInformation>request.body;
+  const data = <DataUserInformation>request.body;
 
   await manageUserInformationUseCase.update({
-    weight,
-    height,
-    gender,
-    age,
-    bmr,
-    imc,
-    activityLevel,
+    ...data,
     userId: request.body.userId
   });
 
@@ -115,11 +102,10 @@ userRouter.get('/goals', authMiddleware, async (request, response) => {
 
 // update in user goals
 userRouter.put('/update-goals', authMiddleware, async (request, response) => {
-  const { calories, water } = <DataUserGoal>request.body;
+  const data = <DataUserGoal>request.body;
 
   await manageUserGoalUseCase.update({
-    calories,
-    water,
+    ...data,
     userId: request.body.userId
   });
 

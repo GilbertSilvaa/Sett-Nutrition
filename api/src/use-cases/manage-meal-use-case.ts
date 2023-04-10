@@ -3,27 +3,16 @@ import { MealRepository, CreateDataMeal, DataGetMeal } from '../repositories/mea
 export class ManageMealUseCase {
   constructor(private mealRepository: MealRepository) {}
   
-  async getMeals({ date, userId }: DataGetMeal) {
-    return await this.mealRepository.getMeals({
-      date,
-      userId
-    });
+  async getMeals(params: DataGetMeal) {
+    return await this.mealRepository.getMeals(params);
   }
 
-  async create({ foods, mealType, userId }: CreateDataMeal) {
-    return await this.mealRepository.create({
-      foods,
-      userId,
-      mealType
-    });
+  async create(params: CreateDataMeal) {
+    return await this.mealRepository.create(params);
   }
 
-  async update({ _id, foods, mealType }: CreateDataMeal) {
-    await this.mealRepository.update({
-      _id,
-      foods,
-      mealType
-    });
+  async update(params: CreateDataMeal) {
+    await this.mealRepository.update(params);
   }
 
   async delete(mealId: string) {

@@ -7,19 +7,12 @@ export class ManageMealTypeUseCase {
     return await this.mealTypeRepository.getAll();
   }
 
-  async create({ name, image }: CreateDataMealType) {
-    return await this.mealTypeRepository.create({
-      name,
-      image
-    });
+  async create(params: CreateDataMealType) {
+    return await this.mealTypeRepository.create(params);
   }
 
-  async update({ name, image, _id }: CreateDataMealType) {
-    await this.mealTypeRepository.update({
-      name,
-      image,
-      _id
-    });
+  async update(params: CreateDataMealType) {
+    await this.mealTypeRepository.update(params);
   }
 
   async delete(_id: string) {

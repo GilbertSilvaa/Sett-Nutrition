@@ -3,18 +3,12 @@ import { WaterRepository, DataAddWater, DataGetWater } from '../repositories/wat
 export class ManageWaterUseCase {
   constructor(private waterRepository: WaterRepository) {}
 
-  async getWaterByDate({ date, userId }: DataGetWater) {
-    return await this.waterRepository.getWaterByDate({
-      date,
-      userId
-    });
+  async getWaterByDate(params: DataGetWater) {
+    return await this.waterRepository.getWaterByDate(params);
   }
 
-  async addWater({ liters, userId }: DataAddWater) {
-    await this.waterRepository.addWater({
-      liters,
-      userId
-    });
+  async addWater(params: DataAddWater) {
+    await this.waterRepository.addWater(params);
   }
 
   async removeWater(waterId: string) {

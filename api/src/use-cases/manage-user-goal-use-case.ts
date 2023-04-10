@@ -3,12 +3,8 @@ import { UserGoalRepository, DataUserGoal } from '../repositories/user-goal-repo
 export class ManageUserGoalUseCase {
   constructor(private userGoalRepository: UserGoalRepository) {}
 
-  async update({ calories, water, userId }: DataUserGoal) {
-    await this.userGoalRepository.update({
-      calories,
-      water,
-      userId
-    });
+  async update(params: DataUserGoal) {
+    await this.userGoalRepository.update(params);
   }
 
   async getGoatById(userId: string) {

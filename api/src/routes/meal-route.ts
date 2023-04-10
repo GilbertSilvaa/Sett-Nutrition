@@ -62,13 +62,9 @@ mealRouter.post('/create', authMiddleware, async (request, response) => {
 
 // update meal
 mealRouter.put('/update', authMiddleware, async (request, response) => {
-  const { _id, foods, mealType } = <CreateDataMeal>request.body;
+  const data = <CreateDataMeal>request.body;
 
-  await manageMealUseCase.update({
-    _id,
-    foods,
-    mealType
-  });
+  await manageMealUseCase.update(data);
 
   return response.status(204).send();
 });
@@ -91,25 +87,18 @@ mealRouter.get('/all-types', authMiddleware, async (request, response) => {
 
 // create meal type
 mealRouter.post('/create-type', authMiddleware, async (request, response) => {
-  const { name, image } = <CreateDataMealType>request.body;
+  const data = <CreateDataMealType>request.body;
 
-  const mealTypeResponse = await manageMealTypeUseCase.create({
-    name,
-    image
-  });
+  const mealTypeResponse = await manageMealTypeUseCase.create(data);
 
   return response.status(201).json(mealTypeResponse);
 });
 
 // update meal type
 mealRouter.put('/update-type', authMiddleware, async (request, response) => {
-  const { name, image, _id } = <CreateDataMealType>request.body;
+  const data = <CreateDataMealType>request.body;
 
-  await manageMealTypeUseCase.update({
-    name,
-    image,
-    _id
-  });
+  await manageMealTypeUseCase.update(data);
 
   return response.status(204).send();
 });

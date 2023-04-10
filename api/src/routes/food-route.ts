@@ -35,35 +35,18 @@ foodRouter.get('/:id', authMiddleware, async (request, response) => {
 
 // create a food
 foodRouter.post('/create', authMiddleware, async (request, response) => {
-  const { name, calories, proteins, carbohydrates, fats, portionInGrams, image } = <CreateDataFood>request.body;
+  const data = <CreateDataFood>request.body;
 
-  const foodResponse = await manageFoodUseCase.create({
-    name,
-    calories,
-    proteins,
-    carbohydrates,
-    fats,
-    portionInGrams,
-    image
-  });
+  const foodResponse = await manageFoodUseCase.create(data);
 
   return response.status(201).json(foodResponse);
 });
 
 // update in food
 foodRouter.put('/update', authMiddleware, async (request, response) => {
-  const { _id, name, calories, proteins, carbohydrates, fats, portionInGrams, image } = <CreateDataFood>request.body;
+  const data = <CreateDataFood>request.body;
   
-  await manageFoodUseCase.update({
-    _id,
-    name,
-    calories,
-    proteins,
-    carbohydrates,
-    fats,
-    portionInGrams,
-    image
-  });
+  await manageFoodUseCase.update(data);
 
   return response.status(204).send();
 });

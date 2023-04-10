@@ -6,17 +6,8 @@ import {
 export class ManageUserInformationUseCase {
   constructor(private userInformationRepository: UserInformationRepository) {}
 
-  async update({ weight, height, gender, age, bmr, imc, activityLevel, userId }: DataUserInformation) {
-    await this.userInformationRepository.update({
-      weight,
-      height,
-      gender,
-      age,
-      bmr,
-      imc,
-      userId,
-      activityLevel
-    });
+  async update(params: DataUserInformation) {
+    await this.userInformationRepository.update(params);
   }
 
   async getInformationById(userId: string) {

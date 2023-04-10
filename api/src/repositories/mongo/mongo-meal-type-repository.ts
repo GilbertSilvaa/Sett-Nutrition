@@ -8,11 +8,8 @@ export class MongoMealTypeRepository implements MealTypeRepository {
     return await MealType.find();
   }
 
-  async create({ name, image }: CreateDataMealType) {
-    return await MealType.create({
-      name,
-      image
-    });
+  async create(params: CreateDataMealType) {
+    return await MealType.create(params);
   }
   
   async update({ name, image, _id }: CreateDataMealType) {
