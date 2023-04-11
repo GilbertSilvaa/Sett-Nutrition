@@ -10,11 +10,8 @@ export class MongoWaterRepository implements WaterRepository {
     });
   }
 
-  async addWater({ liters, userId }: DataAddWater) {
-    await Water.create({
-      liters,
-      userId
-    });
+  async addWater(params: DataAddWater) {
+    await Water.create(params);
   }
 
   async removeWater(_id: string) {

@@ -10,5 +10,5 @@ export class MongoUserGoalRepository implements UserGoalRepository {
   async getGoatById(userId: string) {
     return await UserGoal.findOne({ userId });
   }
-
+  
 }

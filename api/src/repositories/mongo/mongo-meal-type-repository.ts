@@ -12,11 +12,8 @@ export class MongoMealTypeRepository implements MealTypeRepository {
     return await MealType.create(params);
   }
   
-  async update({ name, image, _id }: CreateDataMealType) {
-    await MealType.updateOne({ _id }, {
-      name,
-      image
-    });
+  async update({ _id, ...params }: CreateDataMealType) {
+    await MealType.updateOne({ _id }, params);
   }
 
   async delete(_id: string) {

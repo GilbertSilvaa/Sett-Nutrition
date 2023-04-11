@@ -7,21 +7,13 @@ import { Meal } from '../../models/meal-model';
 
 export class MongoUserRepository implements UserRepository {
 
-  async create({ name, email, password, idType }: CreateDataUser) {
-    const userResponse = await User.create({
-      name,
-      email,
-      password,
-      idType
-    });
+  async create(params: CreateDataUser) {
+    const userResponse = await User.create(params);
 
-    await UserInformation.create({
-      userId: userResponse._id
-    });
-
-    await UserGoal.create({
-      userId: userResponse._id
-    });
+    await Promise.all([
+      UserInformation.create({ userId: userResponse._id }),
+      UserGoal.create({ userId: userResponse._id })
+    ]);
 
     return userResponse;
   }
