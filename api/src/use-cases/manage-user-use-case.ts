@@ -1,5 +1,6 @@
 import dotenv from 'dotenv-safe';
 
+import { LoginUseCase } from './login-use-case';
 import { EncryptAdapter } from '../adapters/encrypt-adapter';
 import { TokenAdapter } from '../adapters/token-adapter';
 import { UserRepository, CreateDataUser } from '../repositories/user-repository';
@@ -20,28 +21,19 @@ export class ManageUserUseCase {
 
     const passwordEncrypted = await this.encryptAdapter.encrypt({ password });
 
-    const userResponse = await this.userRepository.create({
+    await this.userRepository.create({
       ...params,
       email,
       password: passwordEncrypted,
     });
 
-    const KEY_JWT = process.env.KEY_JWT ?? "";
+    const loginUseCase = new LoginUseCase(
+      this.userRepository,
+      this.encryptAdapter,
+      this.tokenAdapter
+    );
 
-    const token = this.tokenAdapter.createToken({ 
-      id: userResponse._id,
-      secret: KEY_JWT,
-      expiresTime: 300000
-    });
-
-    await this.userRepository.newSession({
-      idUser: userResponse._id,
-      token
-    });
-
-    userResponse.token = token;
-
-    return userResponse;
+    return await loginUseCase.execute({ email,  password});
   }
 
   async update({ password, ...params }: CreateDataUser) {
