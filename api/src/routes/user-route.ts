@@ -12,6 +12,7 @@ import { MongoUserGoalRepository } from '../repositories/mongo/mongo-user-goal-r
 import { ManageUserGoalUseCase } from '../use-cases/manage-user-goal-use-case';
 import { DataUserGoal } from '../repositories/user-goal-repository';
 import { authMiddleware } from '../middlewares/auth-middleware';
+import { LoginUseCase } from '../use-cases/login-use-case';
 
 export const userRouter = Router();
 
@@ -24,6 +25,12 @@ const manageUserUseCase = new ManageUserUseCase(
   bcryptEncryptAdapter, 
   jwtTokenAdapter
 ); 
+
+const loginUseCase = new LoginUseCase(
+  mongoUserRepository, 
+  bcryptEncryptAdapter, 
+  jwtTokenAdapter
+);
 
 const mongoUserInformationRepository = new MongoUserInformationRepository();
 const manageUserInformationUseCase = new ManageUserInformationUseCase(
@@ -65,7 +72,7 @@ userRouter.delete('/delete', authMiddleware, async (request, response) => {
 userRouter.post('/login', async (request, response) => {
   const { email, password } = <CreateDataUser>request.body;
 
-  const userResponse = await manageUserUseCase.login({ email, password });
+  const userResponse = await loginUseCase.execute({ email, password });
 
   return response.status(200).json(userResponse);
 });
