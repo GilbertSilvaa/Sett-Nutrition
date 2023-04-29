@@ -4,6 +4,7 @@ import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Container, DateContainer, Text, Button, ButtonMenu } from './styles';
 
 import { formatDate } from './utils/format-date';
+import { Panel } from '../../components/Panel';
 
 export function Home() {
   const navigation = useNavigation();
@@ -56,6 +57,8 @@ export function Home() {
           </Text>
         </Button>
       </DateContainer>
+
+      <Panel sessions={['macros', 'calorias', 'água']}/>
     </Container>
   );
 }

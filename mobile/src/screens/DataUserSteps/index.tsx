@@ -149,8 +149,9 @@ export function DataUserSteps({ userId }: DataUserProps) {
                   }
                   <Button 
                     activeOpacity={0.7} 
-                    onPress={step + 1 == informationSteps.length ? 
-                      handleSubmit(onSubmit) : nextStep
+                    onPress={step + 1 == informationSteps.length 
+                      ? handleSubmit(onSubmit) 
+                      : nextStep
                     }
                   >
                     <Text>

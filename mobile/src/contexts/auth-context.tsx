@@ -35,7 +35,8 @@ export function AuthContextProvider({ children }: AuthProviderProps) {
       
       if(data) setUser({ id: data.userId }); 
 
-    } finally {
+    } 
+    finally {
       setIsUserLoading(false);
     }
   }
