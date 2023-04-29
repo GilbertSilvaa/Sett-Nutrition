@@ -13,6 +13,24 @@ export function Home() {
 
   const nextDay = () => setDate(state => new Date(state.setDate(state.getDate() + 1)));
   const prevDay = () => setDate(state => new Date(state.setDate(state.getDate() - 1)));
+
+  const amountMacrosExample = [
+    { 
+      amount: 900,
+      macroName: 'carbs',
+      color: '#00fff0'
+    },
+    { 
+      amount: 250,
+      macroName: 'protein',
+      color: '#ff5656'
+    },
+    { 
+      amount: 335,
+      macroName: 'gord',
+      color: '#ffb673'
+    },
+  ]
   
   return (
     <Container>
@@ -58,7 +76,9 @@ export function Home() {
         </Button>
       </DateContainer>
 
-      <Panel sessions={['macros', 'calorias', 'água']}/>
+      <Panel 
+        macrosAmounts={amountMacrosExample}
+      />
     </Container>
   );
 }
