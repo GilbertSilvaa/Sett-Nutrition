@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import { 
   Container, 
   SessionItem, 
@@ -7,10 +7,13 @@ import {
   MacrosSubtitle, 
   MacroSubtitleItem, 
   MacroSubtitleColor, 
-  MacroSubtitleText
+  MacroSubtitleText,
+  ChartContainer,
+  ChartTextCenter
 } from './styles';
 
-import PieChart from 'react-native-expo-pie-chart';
+import { VictoryPie } from 'victory-native'; 
+import { theme } from './themeChart';
 
 interface PanelProps {
   macrosAmounts: {
@@ -21,9 +24,10 @@ interface PanelProps {
 }
 
 const panelSessions = ['macros', 'calorias', 'água'];
+const chartData = [900, 250, 335];
 
 export function Panel({ macrosAmounts }: PanelProps) {
-  const [sessionStates, setSessionStates] = useState(
+  const [panelSessionStates, setSessionStates] = useState(
     panelSessions.map((_, index) => index == 0 ? true : false)
   );
 
@@ -36,38 +40,39 @@ export function Panel({ macrosAmounts }: PanelProps) {
   return (
     <Container>
       <SessionsHeader>
-        {panelSessions.map((session, index) => (
+        {panelSessions.map((panelSession, index) => (
           <SessionItem
             key={index} 
             activeOpacity={0.7}
-            accessible={sessionStates[index]} 
+            accessible={panelSessionStates[index]} 
             onPress={() => changeSession(index)}
           > 
             <Text 
               style={{ 
-                color: sessionStates[index] ? '#257be2' : '#FFF', 
+                color: panelSessionStates[index] ? '#257be2' : '#FFF', 
                 fontWeight: 'bold', 
                 textTransform: 'capitalize' 
               }}
             >
-              {session}
+              {panelSession}
             </Text>
           </SessionItem> 
         ))}
       </SessionsHeader>
 
-    
-      {/* @ts-ignore */}
-      <PieChart
-        data={macrosAmounts.map(props => (
-          { 
-            key: props.macroName, 
-            count: props.amount, 
-            color: props.color 
-          }
-        ))}
-        length={170}
-      />
+      <ChartContainer>
+        <VictoryPie
+          innerRadius={64}
+          data={chartData}
+          labels={() => null}
+          theme={theme}
+          height={280}
+        />  
+        <ChartTextCenter>
+          <Text style={{ color: '#FFF', fontSize: 24, fontWeight: '900' }}>1135</Text>
+          <Text style={{ textAlign: 'center', color: '#FFF', fontWeight: '600' }}>Kcals</Text>
+        </ChartTextCenter>
+      </ChartContainer>
 
       <MacrosSubtitle>
         {macrosAmounts.map((subtitle, index) => (

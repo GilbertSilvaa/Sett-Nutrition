@@ -4,7 +4,7 @@ export const Container = styled.View`
   height: 348px;
   width: 100%;
   padding: 8px;
-  background-color: #5fa7ffaf;
+  background-color: #5fa7ffd6;
   border-radius: 4px;
   border: 2px solid #257be2;
 
@@ -70,4 +70,16 @@ export const MacroSubtitleText = styled.View`
   display: flex;
   justify-content: center;
   align-items: center;
+`;
+
+export const ChartContainer = styled.View`
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+`;
+
+export const ChartTextCenter = styled.View`
+  position: absolute;
 `;
