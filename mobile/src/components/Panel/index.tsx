@@ -85,11 +85,11 @@ export function Panel({ macros, calories, water, showOptions }: PanelProps) {
 
       <ChartContainer>
         <VictoryPie
-          innerRadius={64}
+          innerRadius={panelSessionStates[0] ? 64 : 76}
           data={chartData}
           labels={() => null}
           theme={theme}
-          height={280}
+          height={panelSessionStates[0] ? 280 : 300}
         />  
         <ChartTextCenter>
            <Text style={{ color: '#FFF', fontSize: 24, fontWeight: '900' }}>
