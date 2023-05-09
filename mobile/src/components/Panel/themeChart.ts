@@ -2,7 +2,8 @@
 const colors = [
   '#00fff0',
   '#ff5656',
-  '#ffb673'
+  '#ffb673',
+  '#ffffff7d'
 ];
 const charcoal = '#252525';
 const grey = '#969696';

@@ -30,7 +30,15 @@ export function Home() {
       macroName: 'gord',
       color: '#ffb673'
     },
-  ]
+  ];
+  const caloriesExample = {
+    amount: 205,
+    goal: 3000
+  }
+  const waterExample = {
+    amount: 900,
+    goal: 2500
+  }
   
   return (
     <Container>
@@ -77,7 +85,10 @@ export function Home() {
       </DateContainer>
 
       <Panel 
-        macrosAmounts={amountMacrosExample}
+        macros={amountMacrosExample}
+        calories={caloriesExample}
+        water={waterExample}
+        showOptions
       />
     </Container>
   );
