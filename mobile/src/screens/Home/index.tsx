@@ -1,10 +1,11 @@
 import { useState } from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Container, DateContainer, Text, Button, ButtonMenu } from './styles';
 
 import { formatDate } from './utils/format-date';
 import { Panel } from '../../components/Panel';
+import { BoxConsumption } from '../../components/BoxConsumption';
 
 export function Home() {
   const navigation = useNavigation();
@@ -90,6 +91,20 @@ export function Home() {
         water={waterExample}
         showOptions
       />
+
+      <BoxConsumption 
+        title="Refeições" 
+        iconName="fast-food"
+      >
+        <></>
+      </BoxConsumption>
+      
+      <BoxConsumption 
+        title="Consumo de água" 
+        iconName="water"
+      >
+        <></>
+      </BoxConsumption>
     </Container>
   );
 }
