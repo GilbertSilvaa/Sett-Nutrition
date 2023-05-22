@@ -1,15 +1,22 @@
 import { ReactNode } from 'react';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { Container, Header, HeaderTitle } from './styles';
+import { Container, Header, HeaderTitle, Body } from './styles';
 
 interface BoxConsumptionProps {
   title: string;
   iconName: any;
   children: ReactNode;
+  addCConsumption: () => void;
 }
 
-export function BoxConsumption({ title, children, iconName }: BoxConsumptionProps) {
+export function BoxConsumption({ 
+  title, 
+  children, 
+  iconName, 
+  addCConsumption 
+}: BoxConsumptionProps) {
+  
   return (
     <Container>
       <Header>
@@ -35,9 +42,12 @@ export function BoxConsumption({ title, children, iconName }: BoxConsumptionProp
           name="add-circle"
           size={30}
           color="#FFF"
+          onPress={addCConsumption}
         />
       </Header>
-      { children }
+      <Body>
+        { children }
+      </Body>
     </Container>
   );
 }
