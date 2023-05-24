@@ -4,7 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { Input } from '../Input';
 import { ButtonOption } from '../ButtonOption';
 import { 
-  Container, 
+  Container,
+  Main,
   Modal, 
   ModalBody, 
   ModalFooter, 
@@ -21,10 +22,7 @@ interface ModalAmountProps {
   saveData: (data: number) => void;
 }
 
-export function ModalAmount({ 
-  saveData, 
-  closeModal
-}: ModalAmountProps) {
+export function ModalAmount({ saveData, closeModal }: ModalAmountProps) {
   const { control, handleSubmit, reset } = useForm<AmountData>();
   
   function handleCloseModal() {
@@ -41,51 +39,57 @@ export function ModalAmount({
 
   return (
     <Container>
-      <Modal>
-        <ModalHeader>
-          <Ionicons
-            name="water"
-            size={28}
-            color="#FFF"
-          />
-          <ModalTitle>
-            Quantidade
-          </ModalTitle>
-        </ModalHeader>
+      <Modal
+        animationType="slide"
+        transparent
+      >
+        <Main>
+          <ModalHeader>
+            <Ionicons
+              name="water"
+              size={28}
+              color="#FFF"
+            />
+            <ModalTitle>
+              Quantidade
+            </ModalTitle>
+          </ModalHeader>
 
-        <ModalBody>
-          <Controller 
-            control={control}
-            rules={{
-              required: true
-            }}
-            render={({ field: { onChange, onBlur, value } }) => (
-              <Input 
-                unit="ml" 
-                placeholder="500" 
-                keyboardType="numeric" 
-                textAlign="center"
-                onBlur={onBlur}
-                onChangeText={onChange}
-                value={value}
-              />
-            )}
-            name="amount"
-          />
-        </ModalBody>
-        
-        <ModalFooter>
-          <ButtonOption 
-            color="#b32b2b" 
-            title="cancelar" 
-            onPress={handleCloseModal}
-          />
-          <ButtonOption 
-            color="#2d9450" 
-            title="salvar" 
-            onPress={handleSubmit(onSubmit)}
-          />
-        </ModalFooter>
+          <ModalBody>
+            <Controller 
+              control={control}
+              rules={{
+                required: true
+              }}
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Input 
+                  unit="ml" 
+                  placeholder="500" 
+                  keyboardType="numeric" 
+                  textAlign="center"
+                  onBlur={onBlur}
+                  onChangeText={onChange}
+                  value={value} 
+                  autoFocus
+                />
+              )}
+              name="amount"
+            />
+          </ModalBody>
+          
+          <ModalFooter>
+            <ButtonOption 
+              color="#b32b2b" 
+              title="cancelar" 
+              onPress={handleCloseModal}
+            />
+            <ButtonOption 
+              color="#2d9450" 
+              title="salvar" 
+              onPress={handleSubmit(onSubmit)}
+            />
+          </ModalFooter>
+        </Main>
       </Modal>
     </Container>
   );

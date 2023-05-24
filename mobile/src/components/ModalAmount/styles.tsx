@@ -1,23 +1,25 @@
 import styled from 'styled-components/native';
 
+
 export const Container = styled.View`
-  position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #0000009f;
-
-  display: flex;
-  align-items: center;
+  position: absolute;
+  background-color: rgba(0, 0, 0, 0.628);
 `;
 
-export const Modal = styled.View`
+export const Modal = styled.Modal`
+`;
+
+export const Main = styled.View`
   width: 92%;
   height: auto;
-  margin-top: 40%;
+  margin: auto;
+  margin-top: 38%;
   background-color: #FFF;
   border-radius: 4px;
   padding-bottom: 8px;
-`;
+`; 
 
 export const ModalHeader = styled.View`
   width: 100%;

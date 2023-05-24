@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 import { useNavigation, DrawerActions } from '@react-navigation/native';
 import { Container, DateContainer, Text, Button, ButtonMenu } from './styles';
 
