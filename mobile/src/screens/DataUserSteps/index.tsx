@@ -4,15 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { Input } from '../../components/Input';
 import { Select } from '../../components/Select';
 import { Notice } from '../../components/Notice';
-import { 
-  Container, 
-  Modal, 
-  ModalTitle, 
-  ModalBody, 
-  ModalFooter, 
-  Button, 
-  Text 
-} from './styles';
+import * as Style from './styles';
 
 import { informationSteps } from './questions';
 import { bmrCalculate } from '../../utils/calculate';
@@ -90,16 +82,16 @@ export function DataUserSteps({ userId }: DataUserProps) {
   }
 
   return (
-    <Container>
+    <Style.Container>
       <Notice message={messageError} />
       <>
         {informationSteps.map((stepMap, index) => {
           if(index == step)
             return (
-              <Modal key={index}>
-                <ModalTitle>{stepMap.question}</ModalTitle>
+              <Style.Modal key={index}>
+                <Style.ModalTitle>{stepMap.question}</Style.ModalTitle>
 
-                <ModalBody>
+                <Style.ModalBody>
                   {stepMap.isSelectList ?
                     <Controller 
                       control={control}
@@ -131,32 +123,32 @@ export function DataUserSteps({ userId }: DataUserProps) {
                     />
                     
                   }          
-                </ModalBody>
+                </Style.ModalBody>
 
-                <ModalFooter>
+                <Style.ModalFooter>
                   {step == 0 ?
-                    <Text></Text> 
+                    <Style.Text></Style.Text> 
                     :
-                    <Button activeOpacity={0.7} onPress={previousStep}>
-                      <Text>
+                    <Style.Button activeOpacity={0.7} onPress={previousStep}>
+                      <Style.Text>
                         <Ionicons
                           name="arrow-back"
                           size={24}
                           color="#FFF"
                         />
-                      </Text>
-                    </Button>
+                      </Style.Text>
+                    </Style.Button>
                   }
-                  <Button 
+                  <Style.Button 
                     activeOpacity={0.7} 
                     onPress={step + 1 == informationSteps.length 
                       ? handleSubmit(onSubmit) 
                       : nextStep
                     }
                   >
-                    <Text>
+                    <Style.Text>
                       {step + 1 == informationSteps.length ?
-                        <Text>FINALIZAR</Text>
+                        <Style.Text>FINALIZAR</Style.Text>
                           :
                         <Ionicons
                           name="arrow-forward"
@@ -164,13 +156,13 @@ export function DataUserSteps({ userId }: DataUserProps) {
                           color="#FFF"
                         />
                       }
-                    </Text>
-                  </Button>
-                </ModalFooter>
-              </Modal>
+                    </Style.Text>
+                  </Style.Button>
+                </Style.ModalFooter>
+              </Style.Modal>
             );
         })}
       </>
-    </Container>
+    </Style.Container>
   );
 }

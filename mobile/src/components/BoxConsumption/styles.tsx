@@ -6,6 +6,7 @@ export const Container = styled.View`
   margin-top: 32px;
   background-color: #ffffff;
   border-radius: 4px;
+  padding-bottom: 6px;
 `;
 
 export const Header = styled.View`
@@ -28,8 +29,8 @@ export const HeaderTitle = styled.View`
   align-items: center;
 `;
 
-export const Body = styled.View`
+export const Body = styled.ScrollView`
   width: 100%;
-  height: auto;
+  max-height: 240px;
   padding: 8px 4px 0 4px;
 `;
