@@ -8,7 +8,7 @@ export class ManageWaterUseCase {
   }
 
   async addWater(params: DataAddWater) {
-    await this.waterRepository.addWater(params);
+    return await this.waterRepository.addWater(params);
   }
 
   async removeWater(waterId: string) {

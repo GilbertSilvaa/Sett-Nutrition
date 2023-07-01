@@ -11,27 +11,27 @@ const mongoWaterRepository = new MongoWaterRepository();
 const manageWaterRepository = new ManageWaterUseCase(mongoWaterRepository);
 
 // search user water consumption by date 
-waterRouter.get('/search', authMiddleware, async (request, response) => {
+waterRouter.post('/search', authMiddleware, async (request, response) => {
   const { date } = <DataGetWater>request.body;
 
   const waterResponse = await manageWaterRepository.getWaterByDate({
     date,
     userId: request.body.userId
   });
-
-  return response.status(200).json(waterResponse);
+  
+  return response.status(200).json(waterResponse?.reverse());
 });
 
 // user registers water consumption
 waterRouter.post('/add', authMiddleware, async (request, response) => {
   const { liters } = <DataAddWater>request.body;
 
-  await manageWaterRepository.addWater({
+  const waterResponso = await manageWaterRepository.addWater({
     liters,
     userId: request.body.userId
   });
 
-  return response.status(204).send();
+  return response.status(200).json(waterResponso);
 });
 
 // user removes a water consumption record

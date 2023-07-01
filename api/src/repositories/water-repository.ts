@@ -11,6 +11,6 @@ export interface DataGetWater {
 
 export interface WaterRepository {
   getWaterByDate: (data: DataGetWater) => Promise<IWater[] | null>;
-  addWater: (data: DataAddWater) => Promise<void>;
+  addWater: (data: DataAddWater) => Promise<IWater>;
   removeWater: (idWater: string) => Promise<void>;
 }

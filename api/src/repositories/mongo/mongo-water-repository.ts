@@ -11,7 +11,7 @@ export class MongoWaterRepository implements WaterRepository {
   }
 
   async addWater(params: DataAddWater) {
-    await Water.create(params);
+    return await Water.create(params);
   }
 
   async removeWater(_id: string) {
