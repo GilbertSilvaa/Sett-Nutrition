@@ -7,7 +7,7 @@ interface BoxConsumptionProps {
   title: string;
   iconName: any;
   children: ReactNode;
-  addCConsumption: () => void;
+  addCConsumption?: () => void;
 }
 
 export function BoxConsumption({ 
@@ -38,12 +38,14 @@ export function BoxConsumption({
           </Text>
         </HeaderTitle>
 
-        <Ionicons
-          name="add-circle"
-          size={30}
-          color="#FFF"
-          onPress={addCConsumption}
-        />
+        {addCConsumption &&
+          <Ionicons
+            name="add-circle"
+            size={30}
+            color="#FFF"
+            onPress={addCConsumption}
+          />
+        }
       </Header>
       <Body>
         { children }

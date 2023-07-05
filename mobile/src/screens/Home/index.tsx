@@ -7,6 +7,7 @@ import * as Style from './styles';
 import { formatDate } from './utils/format-date';
 import { Panel } from '../../components/Panel';
 import { BoxConsumption } from '../../components/BoxConsumption';
+import { ModalDelete } from '../../components/ModalDelete';
 import { WaterCard } from './components/WaterCard';
 import { ModalAmount } from '../../components/ModalAmount';
 import { api } from '../../services/api';
@@ -44,8 +45,9 @@ export function Home() {
 
   const [date, setDate] = useState(new Date());
   const [openModalAmountWater, setOpenModalAmountWater] = useState(false);
+  const [openModalDelete, setOpenModalDelete] = useState(false);
+  const [idWaterRemove, setIdWaterRemove] = useState<string|null>(null);
   const [waterConsumption, setWaterConsumption] = useState<WaterConsumption[]>([]);
-  const [isLoading, setIsLoading] = useState(false);
 
   const nextDay = () => setDate(state => new Date(state.setDate(state.getDate() + 1)));
   const prevDay = () => setDate(state => new Date(state.setDate(state.getDate() - 1)));
@@ -72,13 +74,20 @@ export function Home() {
     setWaterConsumption(prev => prev.filter(w => w._id != idWater));
   }
 
+  function handleRemoveWater(idWater: string) {
+    setIdWaterRemove(idWater);
+    setOpenModalDelete(true);
+  }
+
   useEffect(() => {
     !async function() {
       const data = { date: date.toISOString().substring(0, 10) };
       const accessToken = await getAccessToken();
 
-      const { data: response } = await api.post<WaterConsumption[]>('/water/search', data, 
-      { headers: {'x-access-token': accessToken} });
+      const { data: response } = await api
+      .post<WaterConsumption[]>('/water/search', data, 
+        { headers: {'x-access-token': accessToken} }
+      );
 
       setWaterConsumption(response);
     }();
@@ -143,7 +152,11 @@ export function Home() {
         <BoxConsumption 
           title="Consumo de água" 
           iconName="water"
-          addCConsumption={() => setOpenModalAmountWater(true)}
+          addCConsumption={
+            formatDate(date) == 'Hoje' 
+            ? () => setOpenModalAmountWater(true) 
+            : undefined
+          }
         >
           {waterConsumption.length == 0 
             ? <Text style={{ textAlign: 'center' }}>Sem consumo de água</Text>
@@ -154,18 +167,27 @@ export function Home() {
                 id={consump._id}
                 amountWater={consump.liters*1000}
                 time={`${dateWater.getHours()}:${dateWater.getMinutes()}`}
-                remove={removeConsumptionWater}
+                remove={formatDate(date) == 'Hoje' ? handleRemoveWater : undefined}
               />
             })
           }
         </BoxConsumption>
-
       </Style.Container>
 
       {openModalAmountWater &&  
         <ModalAmount 
           saveData={addConsumptionWater}
           closeModal={() => setOpenModalAmountWater(false)}
+        />
+      }
+      {openModalDelete && 
+        <ModalDelete
+          handleNoClick={() => setOpenModalDelete(false)}
+          handleYesClick={idElement => {
+            setOpenModalDelete(false); 
+            idElement && removeConsumptionWater(idElement);
+          }}
+          idElement={idWaterRemove}
         />
       }
     </>
