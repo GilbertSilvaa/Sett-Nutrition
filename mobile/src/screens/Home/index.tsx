@@ -79,6 +79,10 @@ export function Home() {
     setOpenModalDelete(true);
   }
 
+  function redirectAddMeal() {
+    navigation.navigate('Meals' as never);
+  }
+
   useEffect(() => {
     !async function() {
       const data = { date: date.toISOString().substring(0, 10) };
@@ -142,12 +146,17 @@ export function Home() {
           showOptions
         />
 
-        {/* <BoxConsumption 
+        <BoxConsumption 
           title="Refeições" 
           iconName="fast-food"
+          addCConsumption={
+            formatDate(date) == 'Hoje' 
+            ? () => redirectAddMeal() 
+            : undefined
+          }
         >
           <></>
-        </BoxConsumption> */}
+        </BoxConsumption>
         
         <BoxConsumption 
           title="Consumo de água" 
