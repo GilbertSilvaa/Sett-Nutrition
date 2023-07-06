@@ -36,7 +36,7 @@ export const CardMeal = styled.ImageBackground`
 export const CardMealMain =  styled.View`
   width: 100%;
   height: 100%;
-  background-color: #00000060;
+  background-color: #00000068;
   border-radius: 8px;
   display: flex;
   align-items: center;
