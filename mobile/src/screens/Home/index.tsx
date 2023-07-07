@@ -80,7 +80,9 @@ export function Home() {
   }
 
   function redirectAddMeal() {
-    navigation.navigate('Meals' as never);
+    navigation.navigate({
+      name: 'Meals'
+    } as never);
   }
 
   useEffect(() => {
@@ -168,7 +170,7 @@ export function Home() {
           }
         >
           {waterConsumption.length == 0 
-            ? <Text style={{ textAlign: 'center' }}>Sem consumo de água</Text>
+            ? <Text style={{ textAlign: 'center' }}>Sem registros</Text>
             : waterConsumption.map((consump, index) => {
               const dateWater = new Date(consump.dateWater);
               return <WaterCard 
