@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useNavigation, DrawerActions } from '@react-navigation/native';
+import { useNavigation, DrawerActions, CommonActions } from '@react-navigation/native';
 import * as Style from './styles';
 
 import { formatDate } from './utils/format-date';
@@ -80,9 +80,7 @@ export function Home() {
   }
 
   function redirectAddMeal() {
-    navigation.navigate({
-      name: 'Meals'
-    } as never);
+    navigation.dispatch(CommonActions.navigate({ name: 'Meals' }))
   }
 
   useEffect(() => {

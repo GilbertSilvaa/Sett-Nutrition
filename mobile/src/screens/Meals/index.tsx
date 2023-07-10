@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useNavigation, CommonActions } from '@react-navigation/native';
 
 import { api } from '../../services/api';
 import { getAccessToken } from '../../utils/access-token';
@@ -12,7 +13,19 @@ interface TypeMeal {
 }
 
 export function Meals() {
+  const navigation = useNavigation();
+
   const [typeMealList, setTypeMealList] = useState<TypeMeal[]>([]);
+
+  function redirectMealScreen(idTypeMeal: string, nameMeal: string) {
+    navigation.dispatch(CommonActions.navigate({ 
+      name: 'Meal', 
+      params: { 
+        idTypeMeal, 
+        nameMeal 
+      } 
+    }));
+  }
 
   useEffect(() => {
     !async function getTypesMeal() {
@@ -32,7 +45,11 @@ export function Meals() {
       </Style.Header>
 
       {typeMealList.map((typeMeal, index) =>  
-        <Style.CardMealButton activeOpacity={.7} key={index}>
+        <Style.CardMealButton 
+          activeOpacity={.7} 
+          key={index} 
+          onPress={() => redirectMealScreen(typeMeal._id, typeMeal.name)}
+        >
           <Style.CardMeal 
             resizeMode='cover' 
             source={{ uri: typeMeal.image}}
