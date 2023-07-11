@@ -47,7 +47,7 @@ export function BoxConsumption({
           />
         }
       </Header>
-      <Body>
+      <Body nestedScrollEnabled>
         { children }
       </Body>
     </Container>

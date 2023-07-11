@@ -10,7 +10,7 @@ export const Container = styled.ScrollView`
 export const DateContainer = styled.View`
   width: 70%;
   height: auto;
-  margin: 24px auto;
+  margin: 20px auto;
 
   display: flex;
   flex-direction: row;
