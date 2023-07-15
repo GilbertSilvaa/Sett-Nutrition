@@ -2,11 +2,11 @@ import { useRoute, RouteProp, useNavigation, StackActions } from '@react-navigat
 import { RootStackParamList } from '../../routes/stack-routes';
 
 import { BoxConsumption } from '../../components/BoxConsumption';
+import { ButtonOption } from '../../components/ButtonOption';
 import { Panel } from '../../components/Panel';
 
 import { Container, Header, Text } from '../Meals/styles';
 import { Footer, Main } from './styles';
-import { ButtonOption } from '../../components/ButtonOption';
 
 const amountMacrosExample = [
   { 
