@@ -14,6 +14,7 @@ export const Header = styled.View`
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
   margin-bottom: 20px;
+  padding: 16px;
 `;
 
 export const Text = styled.Text`

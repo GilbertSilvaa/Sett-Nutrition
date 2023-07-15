@@ -1,4 +1,4 @@
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { useRoute, RouteProp, useNavigation, StackActions } from '@react-navigation/native';
 import { RootStackParamList } from '../../routes/stack-routes';
 
 import { BoxConsumption } from '../../components/BoxConsumption';
@@ -38,6 +38,7 @@ type MealScreenRouteProps = RouteProp<RootStackParamList, 'Meal'>;
 
 export function MealScreen() {
   const { params } = useRoute<MealScreenRouteProps>();
+  const navigator = useNavigation();
 
   return (
     <Container>
@@ -51,12 +52,20 @@ export function MealScreen() {
           water={waterExample}
         />
 
-        <BoxConsumption title="Alimentos" iconName="pizza-outline">
+        <BoxConsumption 
+          title="Alimentos" 
+          iconName="pizza-outline"
+          addCConsumption={() => navigator.dispatch(StackActions.push('SearchFood'))}
+        >
 
         </BoxConsumption>
       </Main>
       <Footer>
-        <ButtonOption title="cancelar" color="#b32b2b"/>
+        <ButtonOption 
+          title="cancelar" 
+          color="#b32b2b"
+          onPress={() => navigator.dispatch(StackActions.popToTop())}
+        />
         <ButtonOption title="salvar" color="#2d9450"/>
       </Footer>
     </Container>
