@@ -11,7 +11,8 @@ export class MongoFoodRepository implements FoodRepository {
   async getByname(name: string) {
     return await Food.find({
       name: {
-        $regex: `.*${name}.*`
+        $regex: `.*${name}.*`,
+        $options: 'i'
       }
     });
   }
