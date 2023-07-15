@@ -3,6 +3,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Home } from '../screens/Home';
 import { Meals } from '../screens/Meals';
 import { MealScreen } from '../screens/MealScreen';
+import { SearchFood } from '../screens/SeachFood';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -10,7 +11,8 @@ export type RootStackParamList = {
   Meal: { 
     idTypeMeal: string;
     nameMeal: string;
-  }
+  },
+  SearchFood: undefined;
 }
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -35,6 +37,13 @@ export default function StackRoutes() {
       <Stack.Screen
         name="Meal"
         component={ MealScreen }
+        options={{
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="SearchFood"
+        component={ SearchFood }
         options={{
           headerShown: false
         }}
