@@ -1,18 +1,20 @@
 import { useState } from 'react';
+import { useForm, Controller } from 'react-hook-form';
 import { Input } from '../../components/Input';
+import { CardFoodSearch } from './components/CardFoodSearch';
 import { Container, Header } from '../Meals/styles';
 
-import { useForm, Controller } from 'react-hook-form';
 import { api } from '../../services/api';
 import { getAccessToken } from '../../utils/access-token';
 import { Food } from '../../@types/food';
-import { CardFoodSearch } from './components/CardFoodSearch';
+import { CommonActions, useNavigation } from '@react-navigation/native';
 
 interface SearchFoodata {
   search: string;
 }
 
 export function SearchFood() {
+  const navigation = useNavigation();
   const { control, handleSubmit } = useForm<SearchFoodata>();
 
   const [foodListResult, setFoodListResult] = useState<Food[]>([]);
@@ -26,6 +28,13 @@ export function SearchFood() {
     });
 
     setFoodListResult(response);
+  }
+
+  function redirectFoodScreen(idFood: string) {
+    navigation.dispatch(CommonActions.navigate({
+      name: 'FoodScreen',
+      params: { idFood }
+    }));
   }
 
   return (
@@ -53,6 +62,7 @@ export function SearchFood() {
           id={food._id} 
           image={food.image}  
           name={food.name}
+          onPress={redirectFoodScreen}
         />
       )}
     </Container>

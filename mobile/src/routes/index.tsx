@@ -12,8 +12,6 @@ import { useAuth } from '../hooks/use-auth';
 import StackRoutes from './stack-routes';
 import { Loading } from '../components/Loading';
 import { removeAcessToken } from '../utils/access-token';
-import { Home } from '../screens/Home';
-
 
 function CustomDrawerContent(props: DrawerContentComponentProps) {
 

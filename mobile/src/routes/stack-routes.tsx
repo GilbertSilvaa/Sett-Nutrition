@@ -4,6 +4,7 @@ import { Home } from '../screens/Home';
 import { Meals } from '../screens/Meals';
 import { MealScreen } from '../screens/MealScreen';
 import { SearchFood } from '../screens/SeachFood';
+import { FoodScreen } from '../screens/FoodScreen';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -12,6 +13,9 @@ export type RootStackParamList = {
     idTypeMeal: string;
     nameMeal: string;
   },
+  FoodScreen: {
+    idFood: string;
+  }
   SearchFood: undefined;
 }
 
@@ -44,6 +48,13 @@ export default function StackRoutes() {
       <Stack.Screen
         name="SearchFood"
         component={ SearchFood }
+        options={{
+          headerShown: false
+        }}
+      />
+      <Stack.Screen
+        name="FoodScreen"
+        component={ FoodScreen }
         options={{
           headerShown: false
         }}

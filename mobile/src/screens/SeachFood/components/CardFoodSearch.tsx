@@ -1,14 +1,16 @@
+import { TouchableOpacityProps } from 'react-native';
 import styled from 'styled-components/native';
 
 interface CardFoodSearchProps {
   id: string;
   name: string;
   image?: string;
+  onPress: (id: string) => void;
 }
 
-export function CardFoodSearch({ id, image, name }: CardFoodSearchProps) {
+export function CardFoodSearch({ id, image, name, onPress }: CardFoodSearchProps) {
   return (
-    <Container activeOpacity={0.7}>
+    <Container activeOpacity={0.7} onPress={_ => onPress(id)}>
       <Image 
         source={{ uri: image}}/>
       <Text>{ name }</Text>
